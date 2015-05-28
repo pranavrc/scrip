@@ -1,0 +1,13 @@
+// Sample IOU with traditional Backus-Naur Form
+// Example Syntax: Duff paid 200 for Buff,Gruff and Buff paid 100 for Duff,Gruff.
+
+// A collection of sponsorships, with the conjunction "and".
+<sponsorships> ::= <sponsorship> {"and" <sponsorship>}
+
+// An individual sponsorship: "Duff paid 200 for Buff,Gruff"
+<sponsorship> ::= <sponsor> "paid" <expense> {"," <sponsee>}
+
+<sponsor> ::= <person>
+<sponsee> ::= <person>
+
+<person> ::= <name>
