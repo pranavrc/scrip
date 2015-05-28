@@ -1,2 +1,2 @@
 # scrip
-IOU with Parsing Expression Grammar.
+IOU with Context-Free Grammar.
