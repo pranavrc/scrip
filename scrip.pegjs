@@ -14,6 +14,9 @@
 
   for (var each in sponsees) {
    var sponsee = sponsees[each];
+   if (sponsee === sponsor) {
+    continue;
+   }
    sponsorship[sponsee] = {};
    sponsorship[sponsee][sponsor] = expense;
   }
