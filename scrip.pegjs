@@ -1,57 +1,57 @@
 {
- var scrip = {};
+  var scrip = {};
 
- function isEmptyObj (obj) {
-  return Object.keys(obj).length == 0;
- }
-
- function makeInteger (num) {
-  return parseInt(num.join(""), 10);
- }
-
- function parseSponsorship (sponsor, expense, sponsees) {
-  var sponsorship = {};
-
-  for (var each in sponsees) {
-   var sponsee = sponsees[each];
-   if (sponsee === sponsor) {
-    continue;
-   }
-   sponsorship[sponsee] = {};
-   sponsorship[sponsee][sponsor] = expense;
+  function isEmptyObj (obj) {
+    return Object.keys(obj).length == 0;
   }
 
-  return sponsorship;
- }
-
- function updateScrip (debtor, debts) {
-  for (debtee in debts) {
-   if (scrip[debtee] && scrip[debtee][debtor]) {
-    scrip[debtee][debtor] -= debts[debtee];
-   } else if (scrip[debtor] && scrip[debtor][debtee]) {
-    scrip[debtor][debtee] += debts[debtee];
-   } else if (scrip[debtor]) {
-    scrip[debtor][debtee] = debts[debtee];
-   } else {
-    scrip[debtor] = {};
-    scrip[debtor][debtee] = debts[debtee];
-   }
+  function makeInteger (num) {
+    return parseInt(num.join(""), 10);
   }
 
-  return scrip;
- }
+  function parseSponsorship (sponsor, expense, sponsees) {
+    var sponsorship = {};
 
- function processDebts (debtors) {
-  if (!isEmptyObj(scrip)) {
-   for (var debtor in debtors) {
-    scrip = updateScrip(debtor, debtors[debtor]);
-   }
-  } else {
-   scrip = debtors;
+    for (var each in sponsees) {
+      var sponsee = sponsees[each];
+      if (sponsee === sponsor) {
+        continue;
+      }
+      sponsorship[sponsee] = {};
+      sponsorship[sponsee][sponsor] = expense;
+    }
+
+    return sponsorship;
   }
 
-  return scrip;
- }
+  function updateScrip (debtor, debts) {
+    for (debtee in debts) {
+      if (scrip[debtee] && scrip[debtee][debtor]) {
+        scrip[debtee][debtor] -= debts[debtee];
+      } else if (scrip[debtor] && scrip[debtor][debtee]) {
+        scrip[debtor][debtee] += debts[debtee];
+      } else if (scrip[debtor]) {
+        scrip[debtor][debtee] = debts[debtee];
+      } else {
+        scrip[debtor] = {};
+        scrip[debtor][debtee] = debts[debtee];
+      }
+    }
+
+    return scrip;
+  }
+
+  function processDebts (debtors) {
+    if (!isEmptyObj(scrip)) {
+      for (var debtor in debtors) {
+        scrip = updateScrip(debtor, debtors[debtor]);
+      }
+    } else {
+      scrip = debtors;
+    }
+
+    return scrip;
+  }
 }
 
 start
