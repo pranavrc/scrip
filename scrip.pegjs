@@ -1,6 +1,10 @@
 {
  var scrip = {};
 
+ function isEmptyObj (obj) {
+  return Object.keys(obj).length == 0;
+ }
+
  function makeInteger (num) {
   return parseInt(num.join(""), 10);
  }
@@ -8,13 +12,35 @@
  function parseSponsorship (sponsor, expense, sponsees) {
   var sponsorship = {};
 
-  for (var eachSponsee in sponsees) {
-   var sponsee = sponsees[eachSponsee];
+  for (var each in sponsees) {
+   var sponsee = sponsees[each];
    sponsorship[sponsee] = {};
    sponsorship[sponsee][sponsor] = expense;
   }
 
   return sponsorship;
+ }
+
+ function updateScrip (debtor, debts) {
+  for (debtee in debts) {
+   if (scrip[debtee][debtor]) {
+    scrip[debtee][debtor] -= debts[debtee];
+   }
+  }
+
+  return scrip;
+ }
+
+ function processDebts (debtors, scrip) {
+  if (!isEmptyObj(scrip)) {
+   for (var debtor in debtors) {
+    scrip = updateScrip(debtor, debtors[debtor]);
+   }
+  } else {
+   scrip = debtors;
+  }
+
+  return scrip;
  }
 }
 
@@ -22,7 +48,7 @@ start
  = sponsorships
 
 sponsorships
- = left:sponsorship _ "and" _ right:sponsorships { return [left, right]; }
+ = left:sponsorship _ "and" _ right:sponsorships { return processDebts(left, scrip); }
  / sponsorship
 
 sponsorship
@@ -45,7 +71,7 @@ person
  = name: [a-zA-Z]+ { return name.join(""); }
 
 // mandatory whitespace
-_ 
+_
  = [ \t\r\n]+
 
 // optional whitespace
