@@ -35,7 +35,7 @@
   }
 
   function updateScrip (debtor, debts) {
-    for (debtee in debts) {
+    for (var debtee in debts) {
       if (scrip[debtee] && scrip[debtee][debtor]) {
         scrip[debtee][debtor] -= debts[debtee];
       } else if (scrip[debtor] && scrip[debtor][debtee]) {
