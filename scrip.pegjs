@@ -1,3 +1,13 @@
+/* scrip.pegjs
+ * (c) Pranav Ravichandran <me@onloop.net>
+ */
+
+// Initializers and grammar for scrip functions and persistence.
+
+
+// -------------------------------------------------
+// Initializers.
+
 {
   var scrip = {};
 
@@ -54,36 +64,43 @@
   }
 }
 
+// -------------------------------------------------
+// Grammar and rules.
+
 start
- = sponsorships
+  = sponsorships
 
 sponsorships
- = left:sponsorship _ "and" _ right:sponsorships { return processDebts(left); }
- / left:sponsorship { return processDebts(left); }
+  = left:sponsorship _ "and" _ right:sponsorships { return processDebts(left); }
+  / left:sponsorship { return processDebts(left); }
 
 sponsorship
- = left:sponsor _ "paid" _ middle:expense _ "on behalf of" _ right:sponsees { return parseSponsorship(left, middle, right); }
+  = left:sponsor _ "paid" _ middle:expense _ "on behalf of" _ right:sponsees { return parseSponsorship(left, middle, right); }
 
 sponsor
- = person
+  = person
 
 expense
- = numbers: [0-9]+ { return makeInteger(numbers); }
+  = numbers: [0-9]+ { return makeInteger(numbers); }
 
 sponsees
- = left:sponsee __ "," __ right:sponsees { return [left].concat(right); }
- / left:sponsee { return [left]; }
+  = left:sponsee __ "," __ right:sponsees { return [left].concat(right); }
+  / left:sponsee { return [left]; }
 
 sponsee
- = person
+  = person
 
 person
- = name: [a-zA-Z]+ { return name.join(""); }
+  = name: [a-zA-Z]+ { return name.join(""); }
 
 // mandatory whitespace
 _
- = [ \t\r\n]+
+  = [ \t\r\n]+
 
 // optional whitespace
 __
- = [ \t\r\n]*
+  = [ \t\r\n]*
+
+// -------------------------------------------------
+
+
