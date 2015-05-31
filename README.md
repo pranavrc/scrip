@@ -26,7 +26,7 @@ Duff paid 500 on behalf of Buff,Gruff and Buff paid 1000 on behalf of Duff,Gruff
 
 ### Parser results
 
-The parser takes in a scrip of the above syntax and returns a JSON object with *debtors* as keys, and {*debtee*: *amount*} as values.
+The parser takes in a scrip of the above syntax and returns a JSON response with *debtors* as keys, and {*debtee*: *amount*} as values.
 
 For instance,
 ```
