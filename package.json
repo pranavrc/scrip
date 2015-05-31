@@ -1,0 +1,15 @@
+{
+  "name": "scrip",
+  "description": "IOU with context-free grammar",
+  "version": "0.0.1",
+  "private": true,
+  "dependencies": {
+    "express": "4.12.4",
+    "chai": "2.3.0",
+    "mocha": "2.2.5",
+    "supertest": "1.0.1"
+  },
+  "scripts": {
+    "test": "mocha"
+  }
+}
