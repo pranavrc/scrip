@@ -7,9 +7,16 @@ var testScrip = "A paid 200 on behalf of B,C and \
 
 var result = parser(testScrip);
 
-result.A.C.should.eql(800);
-result.A.B.should.eql(100);
-result.B.C.should.eql(700);
+describe("Parser tests", function () {
+  it("Should compute debts without errors", function (done) {
+    result.A.C.should.eql(800);
+    result.A.B.should.eql(100);
+    result.B.C.should.eql(700);
 
-console.log("All tests passed. Here's the result: \n");
-console.log(result);
+    console.log("All tests passed. Here's the result: \n");
+    console.log(result);
+
+    done();
+  });
+});
+
