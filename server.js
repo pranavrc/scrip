@@ -1,5 +1,5 @@
 var app = require('express')();
-var parser = require('./scrip').parse;
+var parser = require('./src/scrip').parse;
 
 app.get('/', function (req, res) {
   var scrip = req.query.scrip;
