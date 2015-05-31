@@ -48,6 +48,8 @@ $ npm install
 
 ### Running tests
 
+Run `mocha` or `npm test` from the project directory.
+
 ```
 $ mocha
 
