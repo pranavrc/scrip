@@ -75,7 +75,7 @@ sponsorships
   / left:sponsorship { return processDebts(left); }
 
 sponsorship
-  = left:sponsor _ "paid" _ middle:expense _ "on behalf of" _ right:sponsees { return parseSponsorship(left, middle, right); }
+  = left:sponsor _ "paid" _ middle:expense _ "on" _ "behalf" _ "of" _ right:sponsees { return parseSponsorship(left, middle, right); }
 
 sponsor
   = person

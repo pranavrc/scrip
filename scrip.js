@@ -164,7 +164,7 @@ module.exports = (function(){
       }
       
       function parse_sponsorship() {
-        var result0, result1, result2, result3, result4, result5, result6, result7, result8;
+        var result0, result1, result2, result3, result4, result5, result6, result7, result8, result9, result10, result11, result12;
         var pos0, pos1;
         
         pos0 = pos;
@@ -189,21 +189,61 @@ module.exports = (function(){
                 if (result4 !== null) {
                   result5 = parse__();
                   if (result5 !== null) {
-                    if (input.substr(pos, 12) === "on behalf of") {
-                      result6 = "on behalf of";
-                      pos += 12;
+                    if (input.substr(pos, 2) === "on") {
+                      result6 = "on";
+                      pos += 2;
                     } else {
                       result6 = null;
                       if (reportFailures === 0) {
-                        matchFailed("\"on behalf of\"");
+                        matchFailed("\"on\"");
                       }
                     }
                     if (result6 !== null) {
                       result7 = parse__();
                       if (result7 !== null) {
-                        result8 = parse_sponsees();
+                        if (input.substr(pos, 6) === "behalf") {
+                          result8 = "behalf";
+                          pos += 6;
+                        } else {
+                          result8 = null;
+                          if (reportFailures === 0) {
+                            matchFailed("\"behalf\"");
+                          }
+                        }
                         if (result8 !== null) {
-                          result0 = [result0, result1, result2, result3, result4, result5, result6, result7, result8];
+                          result9 = parse__();
+                          if (result9 !== null) {
+                            if (input.substr(pos, 2) === "of") {
+                              result10 = "of";
+                              pos += 2;
+                            } else {
+                              result10 = null;
+                              if (reportFailures === 0) {
+                                matchFailed("\"of\"");
+                              }
+                            }
+                            if (result10 !== null) {
+                              result11 = parse__();
+                              if (result11 !== null) {
+                                result12 = parse_sponsees();
+                                if (result12 !== null) {
+                                  result0 = [result0, result1, result2, result3, result4, result5, result6, result7, result8, result9, result10, result11, result12];
+                                } else {
+                                  result0 = null;
+                                  pos = pos1;
+                                }
+                              } else {
+                                result0 = null;
+                                pos = pos1;
+                              }
+                            } else {
+                              result0 = null;
+                              pos = pos1;
+                            }
+                          } else {
+                            result0 = null;
+                            pos = pos1;
+                          }
                         } else {
                           result0 = null;
                           pos = pos1;
@@ -241,7 +281,7 @@ module.exports = (function(){
           pos = pos1;
         }
         if (result0 !== null) {
-          result0 = (function(offset, left, middle, right) { return parseSponsorship(left, middle, right); })(pos0, result0[0], result0[4], result0[8]);
+          result0 = (function(offset, left, middle, right) { return parseSponsorship(left, middle, right); })(pos0, result0[0], result0[4], result0[12]);
         }
         if (result0 === null) {
           pos = pos0;
